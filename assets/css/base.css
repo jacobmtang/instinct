@@ -1,6 +1,15 @@
-/* base.css: tokens, type, layout, header, footer, buttons, sections. Loaded on every page.
+/* base.css: tokens and reset only — blank canvas, 2026-10-05. Components get added as they are designed.
    Rules (same as Jacob's portfolio): type from the Apple HIG scale (--text-*), spacing from the 4pt grid (--space-*).
    Raw values allowed only for 1px hairlines and corner radii. */
+
+/* Season Mix: trial files in assets/fonts/ load on Jacob's Mac only. That folder is git-ignored (trial licence:
+   one computer, no distribution), so on the live site these requests 404 and the stack falls back to Fraunces. */
+@font-face { font-family: "Season Mix"; src: url("../fonts/SeasonMix-TRIAL-Light.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Season Mix"; src: url("../fonts/SeasonMix-TRIAL-LightItalic.woff2") format("woff2"); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: "Season Mix"; src: url("../fonts/SeasonMix-TRIAL-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Season Mix"; src: url("../fonts/SeasonMix-TRIAL-RegularItalic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Season Mix"; src: url("../fonts/SeasonMix-TRIAL-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Season Mix"; src: url("../fonts/SeasonMix-TRIAL-MediumItalic.woff2") format("woff2"); font-weight: 500; font-style: italic; font-display: swap; }
 
 :root {
   /* colour — sampled from instinct.com and files.instinct.com (2026-10-05) */
@@ -18,9 +27,9 @@
   --bubble-them: #e9e4e0;
   --bubble-me: #121212;
 
-  /* type — stand-ins for Instinct's licensed faces (Melange / GT America / Season Mix); swap in their woff2 files at handover */
-  --font-body: "Instrument Sans", -apple-system, system-ui, sans-serif;
-  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+  /* type — Instinct's faces: Season Mix (display) and GT America (text), both licensed —; the real names come first, so they render wherever they are installed (e.g. trial fonts on Jacob's Mac); visitors without them get the free stand-ins */
+  --font-body: "GT America", "Instrument Sans", -apple-system, system-ui, sans-serif;
+  --font-display: "Season Mix", "Fraunces", Georgia, "Times New Roman", serif;
 
   /* Apple HIG scale, leading rounded to the 4pt grid (as on Jacob's portfolio) */
   --text-display-l: 64px; --leading-display-l: 68px;
@@ -72,75 +81,61 @@ p { margin: 0; }
 h1, h2, h3 { margin: 0; font-weight: 400; }
 :focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; border-radius: 4px; }
 
-.container { width: 100%; max-width: calc(var(--container) + 2 * var(--gutter)); margin-left: auto; margin-right: auto; padding-left: var(--gutter); padding-right: var(--gutter); }
-.measure { max-width: var(--measure); }
-.skip { position: absolute; left: var(--space-4); top: calc(-1 * var(--space-16)); background: var(--ink); color: var(--on-ink); padding: var(--space-2) var(--space-4); border-radius: var(--radius-s); z-index: 20; }
-.skip:focus { top: var(--space-4); }
-
-/* type roles */
-.display { font-family: var(--font-display); font-size: var(--text-large-title); line-height: var(--leading-large-title); letter-spacing: -0.01em; }
-@media (min-width: 768px) { .display { font-size: var(--text-display); line-height: var(--leading-display); } }
-@media (min-width: 1024px) { .display-xl { font-size: var(--text-display-l); line-height: var(--leading-display-l); } }
-.h2 { font-family: var(--font-display); font-size: var(--text-title1); line-height: var(--leading-title1); letter-spacing: -0.005em; }
-@media (min-width: 768px) { .h2 { font-size: var(--text-large-title); line-height: var(--leading-large-title); } }
-.h3 { font-size: var(--text-title3); line-height: var(--leading-title3); font-weight: 600; }
-.lead { font-size: var(--text-title3); line-height: var(--leading-title1); color: var(--ink-soft); }
-.muted { color: var(--muted); }
-.eyebrow { font-size: var(--text-footnote); line-height: var(--leading-footnote); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
-.small { font-size: var(--text-subhead); line-height: var(--leading-subhead); }
-
-/* the brush stroke: Instinct's signature underline, drawn as SVG so it scales */
-.brush { position: relative; display: inline-block; white-space: nowrap; }
-.brush svg { position: absolute; left: -2%; width: 104%; height: .42em; bottom: -.22em; z-index: -1; color: var(--sage); }
-.brush-wrap { position: relative; z-index: 0; white-space: nowrap; }
-
-/* concept banner: honest framing for the pitch — remove at handover */
-.concept { background: var(--ink); color: var(--on-ink); font-size: var(--text-caption); line-height: var(--leading-caption); text-align: center; padding: var(--space-2) var(--gutter); }
-.concept a { color: var(--on-ink); }
-
-/* header */
-.site-header { position: sticky; top: 0; z-index: 10; background: rgb(244 239 236 / .86); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid transparent; transition: border-color .2s; }
-.site-header.is-scrolled { border-bottom-color: var(--line); }
-.site-header .container { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); gap: var(--space-4); }
-.wordmark { font-family: var(--font-display); font-size: var(--text-title2); line-height: var(--leading-title2); text-decoration: none; display: inline-flex; align-items: center; gap: var(--space-2); }
-.wordmark-mark { width: var(--space-3); height: var(--space-6); color: var(--ink); }
-.nav { display: none; gap: var(--space-8); font-size: var(--text-subhead); line-height: var(--leading-subhead); }
-.nav a { text-decoration: none; color: var(--ink-soft); }
-.nav a:hover, .nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; text-decoration-color: var(--sage); text-decoration-thickness: 2px; text-underline-offset: 6px; }
-@media (min-width: 820px) { .nav { display: flex; } }
-
-/* buttons */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: var(--space-12); padding: var(--space-3) var(--space-6); border-radius: var(--radius-pill); font: 500 var(--text-callout)/var(--leading-callout) var(--font-body); text-decoration: none; border: 1px solid transparent; transition: transform .15s ease, background-color .15s ease; }
-.btn:active { transform: scale(.98); }
-.btn-primary { background: var(--ink); color: var(--on-ink); }
-.btn-primary:hover { background: #2a2a2a; }
-.btn-ghost { border-color: var(--line); color: var(--ink); background: transparent; }
-.btn-ghost:hover { background: var(--bg-raised); }
-.btn-sm { min-height: var(--space-10); padding: var(--space-2) var(--space-4); font-size: var(--text-subhead); }
-.btn .arrow { transition: transform .15s ease; }
-.btn:hover .arrow { transform: translateX(2px); }
-
-/* sections */
-.section { padding-top: var(--space-20); padding-bottom: var(--space-20); }
-@media (min-width: 768px) { .section { padding-top: var(--space-32); padding-bottom: var(--space-32); } }
-.section-head { display: grid; gap: var(--space-4); margin-bottom: var(--space-12); max-width: 720px; }
-.rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
-
-.card { background: var(--bg-raised); border: 1px solid var(--line); border-radius: var(--radius-m); padding: var(--space-6); }
-@media (min-width: 768px) { .card { padding: var(--space-8); } }
-
-/* footer */
-.site-footer { border-top: 1px solid var(--line); padding-top: var(--space-16); padding-bottom: var(--space-10); font-size: var(--text-subhead); line-height: var(--leading-subhead); }
-.footer-grid { display: grid; gap: var(--space-10); grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 768px) { .footer-grid { grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr)); } }
-.footer-grid h2 { font-size: var(--text-footnote); line-height: var(--leading-footnote); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-bottom: var(--space-3); }
-.footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
-.footer-grid a { text-decoration: none; color: var(--ink-soft); }
-.footer-grid a:hover { color: var(--ink); text-decoration: underline; }
-.footer-base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); margin-top: var(--space-16); color: var(--muted); font-size: var(--text-footnote); line-height: var(--leading-footnote); }
-
-/* reveal on scroll (JS adds .is-in); content stays visible without JS or with reduced motion */
-@media (prefers-reduced-motion: no-preference) {
-  .js .reveal { opacity: 0; transform: translateY(var(--space-4)); transition: opacity .6s ease, transform .6s ease; }
-  .js .reveal.is-in { opacity: 1; transform: none; }
+/* one screen, no scroll: the page is exactly the viewport.
+   dvh tracks Safari's bars as they show/hide; vh is the fallback for older browsers. */
+html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+.stage {
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
+  display: grid;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
+
+/* hand holding the phone. The PNG/WebP's screen is transparent; .screen sits behind it, measured on the artwork
+   (1800×2117: screen x 937–1652, y 26–1570). Sized by height so it always fits the one screen. */
+.stage { position: relative; overflow: clip; }
+/* The phone body spans 0–74.6% of the artwork's height, so its centre is 37.3% down.
+   top = 50% − 37.3% × 92% puts the phone in the middle of the screen; the wrist runs off the bottom (clipped by .stage). */
+.hand { position: absolute; margin: 0; top: 15.7%; left: 50%; height: 92%; aspect-ratio: 1800 / 2117; transform: translateX(-72.8%); }
+.hand img { position: relative; width: 100%; height: 100%; pointer-events: none; }
+.screen { position: absolute; left: 52.06%; top: 1.23%; width: 39.72%; height: 72.98%; border-radius: 15% / 7%; background: var(--surface); overflow: hidden; }
+.screen video, .screen img { width: 100%; height: 100%; object-fit: cover; }
+
+/* wordmark: Instinct's own SVG, top left on the 4pt grid */
+.wordmark { position: absolute; z-index: 1; top: var(--space-8); left: var(--space-8); display: block; }
+.wordmark img { width: auto; height: var(--space-6); }
+@media (max-width: 767px) { .wordmark { top: var(--space-5); left: var(--space-5); } .wordmark img { height: var(--space-5); } }
+
+/* CTA: rounded pill. Desktop: right side, vertically centred, large. Phones: no room beside the phone, so bottom centre. */
+.cta {
+  position: absolute; z-index: 2;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: var(--space-16);
+  padding: var(--space-4) var(--space-10);
+  border-radius: var(--radius-pill);
+  background: var(--ink); color: var(--on-ink);
+  font: 500 var(--text-title2)/var(--leading-title2) var(--font-body);
+  text-decoration: none; white-space: nowrap;
+  transition: transform .15s ease, background-color .15s ease;
+  /* desktop placement: just past the fingertips. The hand is 92% of the screen height and its fingers end
+     ~16.6% of the screen height right of centre, so the pill tracks the phone at any window size. */
+  left: calc(50% + 17vh + var(--space-16));
+  left: calc(50% + 17dvh + var(--space-16)); top: 0; bottom: 0; margin-top: auto; margin-bottom: auto; height: max-content;
+}
+.cta:hover { background: #2a2a2a; }
+.cta:active { transform: scale(.97); }
+.cta:focus-visible { outline-color: var(--on-ink); outline-offset: -4px; }
+@media (max-width: 1023px) {
+  .cta {
+    top: auto; margin-top: 0; margin-bottom: 0;
+    right: 0; left: 0; margin-left: auto; margin-right: auto; width: max-content;
+    bottom: calc(var(--space-8) + env(safe-area-inset-bottom));
+    min-height: var(--space-12);
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-title3); line-height: var(--leading-title3);
+  }
+}
+
+/* visually hidden, still read by screen readers and search engines */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

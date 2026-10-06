@@ -1,1 +1,4 @@
 .DS_Store
+# Licensed font trials (Season Mix): local preview only. The trial licence allows one computer and no
+# distribution, so these must never reach the public repo. The live site falls back to Fraunces.
+assets/fonts/
