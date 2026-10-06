@@ -11,6 +11,5 @@
 
 ## Pages
 - [Home](https://instinct.com/)
-- [Security](https://instinct.com/security)
 - [Privacy policy](https://instinct.com/privacy)
 - [Terms of service](https://instinct.com/terms)

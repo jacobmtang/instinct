@@ -7,14 +7,11 @@ A redesign mockup of [instinct.com](https://instinct.com) by Jacob Tang, to pitc
 | path | what |
 |---|---|
 | `index.html` | home: hero + chat mock, no-new-interface, what it does, how it works, instinct-to-instinct, trust, integrations, FAQ, CTA |
-| `security/` | Vault, one-time cards, permissions, training, agent-to-agent |
-| `privacy/`, `terms/` | proposed legal layout: sticky TOC, "In short" summaries, placeholders where the live text drops in |
-| `404.html` | not-found page |
 
 ## SEO / AEO already in place
 
-- Unique title, description, canonical and Open Graph tags per page
-- JSON-LD: `Organization`, `WebSite`, `SoftwareApplication`, `FAQPage` (home); `BreadcrumbList` (inner pages)
+- Unique title, description, canonical and Open Graph tags 
+- JSON-LD: `Organization`, `WebSite`, `SoftwareApplication`, `FAQPage`
 - FAQ written as direct question/answer pairs, so answer engines can quote them
 - `sitemap.xml` and `llms.txt`
 - Semantic headings, skip link, reduced-motion support
