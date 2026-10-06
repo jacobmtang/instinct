@@ -1,0 +1,7 @@
+# Concept mockup: blocked from crawlers until Instinct adopts it.
+# At handover, replace with:
+#   User-agent: *
+#   Allow: /
+#   Sitemap: https://instinct.com/sitemap.xml
+User-agent: *
+Disallow: /

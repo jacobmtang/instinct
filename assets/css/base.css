@@ -1,0 +1,146 @@
+/* base.css: tokens, type, layout, header, footer, buttons, sections. Loaded on every page.
+   Rules (same as Jacob's portfolio): type from the Apple HIG scale (--text-*), spacing from the 4pt grid (--space-*).
+   Raw values allowed only for 1px hairlines and corner radii. */
+
+:root {
+  /* colour — sampled from instinct.com and files.instinct.com (2026-10-05) */
+  --bg: #f4efec;            /* instinct.com page + theme-color: warm putty */
+  --bg-raised: #fbfaf9;     /* files.instinct.com page: lighter warm off-white, used for cards */
+  --surface: #ffffff;
+  --ink: #121212;           /* body text on instinct.com */
+  --ink-soft: #1f2322;
+  --muted: rgb(18 18 18 / .6);
+  --faint: rgb(18 18 18 / .35);
+  --line: rgb(18 18 18 / .1);
+  --sage: #73a89a;          /* the brush stroke under "Text Instinct to get started" */
+  --sage-soft: #dfe9e5;
+  --on-ink: #fbfaf9;
+  --bubble-them: #e9e4e0;
+  --bubble-me: #121212;
+
+  /* type — stand-ins for Instinct's licensed faces (Melange / GT America / Season Mix); swap in their woff2 files at handover */
+  --font-body: "Instrument Sans", -apple-system, system-ui, sans-serif;
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+
+  /* Apple HIG scale, leading rounded to the 4pt grid (as on Jacob's portfolio) */
+  --text-display-l: 64px; --leading-display-l: 68px;
+  --text-display: 48px;   --leading-display: 52px;
+  --text-large-title: 34px; --leading-large-title: 40px;
+  --text-title1: 28px;  --leading-title1: 36px;
+  --text-title2: 22px;  --leading-title2: 28px;
+  --text-title3: 20px;  --leading-title3: 24px;
+  --text-body: 17px;    --leading-body: 24px;
+  --text-callout: 16px; --leading-callout: 20px;
+  --text-subhead: 15px; --leading-subhead: 20px;
+  --text-footnote: 13px; --leading-footnote: 20px;
+  --text-caption: 12px; --leading-caption: 16px;
+
+  /* spacing — 4pt grid */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+  --space-12: 48px; --space-16: 64px; --space-20: 80px; --space-24: 96px; --space-32: 128px;
+
+  /* layout */
+  --gutter: var(--space-5);
+  --container: 1120px;
+  --measure: 64ch;
+  --header-h: var(--space-16);
+  --radius-s: 10px;
+  --radius-m: 18px;
+  --radius-l: 28px;
+  --radius-pill: 999px;
+}
+
+@media (min-width: 768px) { :root { --gutter: var(--space-8); } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + var(--space-4)); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-wrap: break-word;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+p { margin: 0; }
+h1, h2, h3 { margin: 0; font-weight: 400; }
+:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; border-radius: 4px; }
+
+.container { width: 100%; max-width: calc(var(--container) + 2 * var(--gutter)); margin-left: auto; margin-right: auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+.measure { max-width: var(--measure); }
+.skip { position: absolute; left: var(--space-4); top: calc(-1 * var(--space-16)); background: var(--ink); color: var(--on-ink); padding: var(--space-2) var(--space-4); border-radius: var(--radius-s); z-index: 20; }
+.skip:focus { top: var(--space-4); }
+
+/* type roles */
+.display { font-family: var(--font-display); font-size: var(--text-large-title); line-height: var(--leading-large-title); letter-spacing: -0.01em; }
+@media (min-width: 768px) { .display { font-size: var(--text-display); line-height: var(--leading-display); } }
+@media (min-width: 1024px) { .display-xl { font-size: var(--text-display-l); line-height: var(--leading-display-l); } }
+.h2 { font-family: var(--font-display); font-size: var(--text-title1); line-height: var(--leading-title1); letter-spacing: -0.005em; }
+@media (min-width: 768px) { .h2 { font-size: var(--text-large-title); line-height: var(--leading-large-title); } }
+.h3 { font-size: var(--text-title3); line-height: var(--leading-title3); font-weight: 600; }
+.lead { font-size: var(--text-title3); line-height: var(--leading-title1); color: var(--ink-soft); }
+.muted { color: var(--muted); }
+.eyebrow { font-size: var(--text-footnote); line-height: var(--leading-footnote); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.small { font-size: var(--text-subhead); line-height: var(--leading-subhead); }
+
+/* the brush stroke: Instinct's signature underline, drawn as SVG so it scales */
+.brush { position: relative; display: inline-block; white-space: nowrap; }
+.brush svg { position: absolute; left: -2%; width: 104%; height: .42em; bottom: -.22em; z-index: -1; color: var(--sage); }
+.brush-wrap { position: relative; z-index: 0; white-space: nowrap; }
+
+/* concept banner: honest framing for the pitch — remove at handover */
+.concept { background: var(--ink); color: var(--on-ink); font-size: var(--text-caption); line-height: var(--leading-caption); text-align: center; padding: var(--space-2) var(--gutter); }
+.concept a { color: var(--on-ink); }
+
+/* header */
+.site-header { position: sticky; top: 0; z-index: 10; background: rgb(244 239 236 / .86); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+.site-header.is-scrolled { border-bottom-color: var(--line); }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); gap: var(--space-4); }
+.wordmark { font-family: var(--font-display); font-size: var(--text-title2); line-height: var(--leading-title2); text-decoration: none; display: inline-flex; align-items: center; gap: var(--space-2); }
+.wordmark-mark { width: var(--space-3); height: var(--space-6); color: var(--ink); }
+.nav { display: none; gap: var(--space-8); font-size: var(--text-subhead); line-height: var(--leading-subhead); }
+.nav a { text-decoration: none; color: var(--ink-soft); }
+.nav a:hover, .nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; text-decoration-color: var(--sage); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+@media (min-width: 820px) { .nav { display: flex; } }
+
+/* buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: var(--space-12); padding: var(--space-3) var(--space-6); border-radius: var(--radius-pill); font: 500 var(--text-callout)/var(--leading-callout) var(--font-body); text-decoration: none; border: 1px solid transparent; transition: transform .15s ease, background-color .15s ease; }
+.btn:active { transform: scale(.98); }
+.btn-primary { background: var(--ink); color: var(--on-ink); }
+.btn-primary:hover { background: #2a2a2a; }
+.btn-ghost { border-color: var(--line); color: var(--ink); background: transparent; }
+.btn-ghost:hover { background: var(--bg-raised); }
+.btn-sm { min-height: var(--space-10); padding: var(--space-2) var(--space-4); font-size: var(--text-subhead); }
+.btn .arrow { transition: transform .15s ease; }
+.btn:hover .arrow { transform: translateX(2px); }
+
+/* sections */
+.section { padding-top: var(--space-20); padding-bottom: var(--space-20); }
+@media (min-width: 768px) { .section { padding-top: var(--space-32); padding-bottom: var(--space-32); } }
+.section-head { display: grid; gap: var(--space-4); margin-bottom: var(--space-12); max-width: 720px; }
+.rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
+
+.card { background: var(--bg-raised); border: 1px solid var(--line); border-radius: var(--radius-m); padding: var(--space-6); }
+@media (min-width: 768px) { .card { padding: var(--space-8); } }
+
+/* footer */
+.site-footer { border-top: 1px solid var(--line); padding-top: var(--space-16); padding-bottom: var(--space-10); font-size: var(--text-subhead); line-height: var(--leading-subhead); }
+.footer-grid { display: grid; gap: var(--space-10); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 768px) { .footer-grid { grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr)); } }
+.footer-grid h2 { font-size: var(--text-footnote); line-height: var(--leading-footnote); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-bottom: var(--space-3); }
+.footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+.footer-grid a { text-decoration: none; color: var(--ink-soft); }
+.footer-grid a:hover { color: var(--ink); text-decoration: underline; }
+.footer-base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); margin-top: var(--space-16); color: var(--muted); font-size: var(--text-footnote); line-height: var(--leading-footnote); }
+
+/* reveal on scroll (JS adds .is-in); content stays visible without JS or with reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal { opacity: 0; transform: translateY(var(--space-4)); transition: opacity .6s ease, transform .6s ease; }
+  .js .reveal.is-in { opacity: 1; transform: none; }
+}

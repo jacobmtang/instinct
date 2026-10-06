@@ -1,0 +1,16 @@
+# Instinct
+
+> Instinct is a personal assistant that understands what you're working on and what's important to you. It connects to your applications and devices (email, messaging, screen, audio, location) and takes action on your behalf. You text it or call it; there is no new interface.
+
+- Access: invite-only, 18+. Start by texting Instinct: https://app.instinct.com/login
+- Channels: iMessage, WhatsApp, Mac app, phone calls
+- Does: follows up on dropped threads, arranges rides, books travel and appointments, orders groceries, reaches out proactively
+- Instinct-to-instinct: assistants coordinate with each other over an end-to-end encrypted connection
+- Security: encrypted Vault for credentials; one-time payment cards via Stripe Link; user-controlled permissions
+- Company: Spear Street Technology, Inc. d/b/a Instinct. Contact: comms@instinct.com
+
+## Pages
+- [Home](https://instinct.com/)
+- [Security](https://instinct.com/security)
+- [Privacy policy](https://instinct.com/privacy)
+- [Terms of service](https://instinct.com/terms)
